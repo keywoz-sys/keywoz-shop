@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Compte Steam Premium</title>
+
+<style>
+:root{
+  --bg:#0f1724;
+  --bg-gradient: linear-gradient(135deg, #0f1724, #1a1f2b);
+  --card:#0b1220;
+  --accent:#000000;
+  --accent-hover:#000000;
+  --white:#eef2ff;
+  --muted:#9aa4b2;
+  --radius:12px;
+}
+body{
+  margin:0;
+  background:var(--bg-gradient);
+  color:var(--white);
+  font-family:Inter, sans-serif;
+}
+.container{
+  max-width:900px;
+  margin:0 auto;
+  padding:20px;
+}
+a{text-decoration:none;color:var(--accent);}
+header a{
+  display:inline-block;
+  margin-bottom:20px;
+  color:var(--muted);
+  transition: color 0.3s;
+}
+header a:hover{color:var(--accent);}
+.product-box{
+  background:var(--card);
+  padding:30px;
+  border-radius:var(--radius);
+  border:1px solid rgba(29, 29, 29, 0.096);
+  box-shadow:0 4px 20px rgba(0,0,0,0.5);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.product-box:hover{
+  transform:translateY(-3px);
+  box-shadow:0 8px 30px rgba(0,0,0,0.6);
+}
+.product-box h1{
+  margin-top:0;
+  margin-bottom:15px;
+}
+.product-box p{
+  line-height:1.6;
+  color:var(--muted);
+}
+.product-box h2,h3{
+  margin-top:25px;
+}
+.reserve-btn{
+  display:inline-block;
+  background:var(--accent);
+  padding:12px 24px;
+  font-weight:600;
+  border-radius:var(--radius);
+  margin-top:20px;
+  color:var(--white);
+  transition: background 0.3s, transform 0.2s;
+  cursor:pointer;
+  text-align:center;
+}
+.reserve-btn:hover{
+  background:var(--accent-hover);
+  transform:scale(1.05);
+}
+.product-gallery{
+  display:flex;
+  gap:20px;
+  overflow-x:auto;
+  margin-top:20px;
+  padding-bottom:10px;
+}
+.product-gallery img{
+  width:250px;
+  border-radius:var(--radius);
+  transition: transform 0.3s;
+  cursor:pointer;
+}
+.product-gallery img:hover{
+  transform:scale(1.05);
+}
+::-webkit-scrollbar{
+  height:8px;
+}
+::-webkit-scrollbar-thumb{
+  background:var(--accent);
+  border-radius:4px;
+}
+::-webkit-scrollbar-track{
+  background:rgba(255,255,255,0.05);
+}
+
+/* -------- SECTION SUGGESTIONS -------- */
+.suggest-section{
+  margin-top:40px;
+}
+.suggest-section h2{
+  margin-bottom:15px;
+}
+.suggest-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:20px;
+}
+.suggest-card{
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:15px;
+  border:1px solid rgba(255,255,255,0.05);
+  text-align:center;
+  transition:0.3s;
+}
+.suggest-card:hover{
+  transform:scale(1.05);
+  box-shadow:0 6px 20px rgba(0,0,0,0.4);
+}
+.suggest-card img{
+  width:100%;
+  border-radius:var(--radius);
+  margin-bottom:10px;
+}
+.suggest-card .title{
+  font-weight:600;
+  color:var(--white);
+  margin-bottom:5px;
+}
+.suggest-card .price{
+  color:var(--muted);
+}
+
+/* Styles modal */
+.modal{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.7);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  opacity:0;
+  pointer-events:none;
+  transition:0.3s;
+}
+.modal.active{
+  opacity:1;
+  pointer-events:auto;
+}
+.modal-content{
+  background:var(--card);
+  padding:30px;
+  border-radius:var(--radius);
+  max-width:500px;
+  width:90%;
+  position:relative;
+}
+.modal-content h2{
+  text-align:center;
+  margin-bottom:20px;
+}
+.modal-content form{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.modal-content input, .modal-content textarea{
+  padding:12px;
+  border-radius:var(--radius);
+  border:1px solid rgba(255, 255, 255, 0.1);
+  background:#000000;
+  color:var(--white);
+  font-family:Inter, sans-serif;
+}
+.modal-content input:focus, .modal-content textarea:focus{
+  outline:none;
+  border-color:var(--accent);
+}
+.modal-content .form-buttons{
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  margin-top:12px;
+}
+.modal-content .form-buttons button{
+  padding:12px 20px;
+  border-radius:var(--radius);
+  font-weight:600;
+  cursor:pointer;
+  border:none;
+}
+.modal-content .form-buttons .btn{
+  background:var(--accent);
+  color:var(--white);
+}
+.modal-content .form-buttons button[type="button"]{
+  background:transparent;
+  border:1px solid rgba(255,255,255,0.1);
+  color:var(--white);
+}
+.modal .close{
+  position:absolute;
+  top:12px;
+  right:12px;
+  font-size:18px;
+  cursor:pointer;
+  color:var(--muted);
+}
+.modal .close:hover{
+  color:var(--accent);
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<header><a href="../index.html">← Retour à la boutique</a></header>
+
+<div class="product-box">
+  <h1>Compte Steam Premium</h1>
+
+  <p>
+    Accès complet avec un jeux inclus de votre choix<br>
+    • Full Access garanti<br>
+    • Email modifiable<br>
+    • Aucun vac / aucun ban<br>
+    • Sécurisé + vérifié manuellement<br><br>
+    Méthode de transaction via email.<br>
+    Réservez votre compte ou passez par le discord pour l'achat.
+  </p>
+
+<h2>Jeux disponibles et leurs prix :</h2>
+
+<ul style="list-style:none; padding-left:0; color:var(--muted); line-height:1.7; margin-top:10px;">
+<div class="suggest-section">
+
+  <div class="suggest-grid">
+
+    <div class="suggest-card">
+      <img src="https://via.placeholder.com/180x80" alt="">
+      <div class="title">No man sky</div>
+      <div class="price">11.99€</div>
+    </div>
+
+    <div class="suggest-card">
+      <img src="https://via.placeholder.com/180x80" alt="">
+      <div class="title">red dead 2</div>
+      <div class="price">14.99€</div>
+    </div>
+
+    <div class="suggest-card">
+      <img src="https://via.placeholder.com/180x80" alt="">
+      <div class="title">Sons of The Forest</div>
+      <div class="price">7.99€</div>
+    </div>
+
+    <div class="suggest-card">
+      <img src="https://via.placeholder.com/180x80" alt="">
+      <div class="title">Raft </div>
+      <div class="price">7.99€</div>
+    </div>
+
+    <div class="suggest-card">
+      <img src="https://via.placeholder.com/180x80" alt="">
+      <div class="title">schedule I </div>
+      <div class="price">11.99€</div>
+    </div>
+
+    <div class="suggest-card">
+      <img src="https://via.placeholder.com/180x80" alt="">
+      <div class="title">Subnautica </div>
+      <div class="price">7.99€</div>
+    </div>
+    
+    
+    <div class="suggest-card">
+      <img src="https://via.placeholder.com/180x80" alt="">
+      <div class="title">Among Us </div>
+      <div class="price">2.99€</div>
+    </div>
+    
+    <div class="suggest-card">
+      <img src="https://via.placeholder.com/180x80" alt="">
+      <div class="title">CS2 10000 hours+ </div>
+      <div class="price">4.99€</div>
+    </div>
+  
+
+  </div>
+</div>
+</ul>
+
+<button class="reserve-btn" id="reserveBtn">Réserver un compte</button>
+
+<h3></h3>
+<div class="product-gallery"></div>
+
+</div>
+</div>
+
+<!-- Modal de réservation -->
+<div class="modal" id="reserveModal">
+  <div class="modal-content">
+    <span class="close" id="closeReserve">&times;</span>
+    <h2>Réserver un compte Steam Premium</h2>
+    <form action="https://formspree.io/f/mgvgpobb" method="POST">
+      <input type="hidden" name="product" value="Compte Steam Premium">
+      <input type="text" name="name" placeholder="Votre nom" required>
+      <input type="email" name="email" placeholder="Votre email" required>
+      <textarea name="message" placeholder="Le jeu de votre choix" rows="4" required></textarea>
+      <div class="form-buttons">
+        <button type="submit" class="btn">Envoyer la réservation</button>
+        <button type="button" id="clearReserve">Effacer</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+const reserveBtn = document.getElementById('reserveBtn');
+const reserveModal = document.getElementById('reserveModal');
+const closeReserve = document.getElementById('closeReserve');
+const clearReserve = document.getElementById('clearReserve');
+
+reserveBtn.onclick = () => reserveModal.classList.add('active');
+closeReserve.onclick = () => reserveModal.classList.remove('active');
+window.onclick = e => { if(e.target === reserveModal) reserveModal.classList.remove('active'); }
+clearReserve.onclick = () => reserveModal.querySelector('form').reset();
+</script>
+
+</body>
+</html>

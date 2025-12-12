@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Boutique de Comptes — Page Unique</title>
+<style>
+:root{
+  --bg-gradient: linear-gradient(180deg,#13093f 0%,#070420 40%,#030c1b 100%);
+  --card:#000000; 
+  --accent:#4f46e5; 
+  --accent-dark:#090638;
+  --muted:#9aa4b2; 
+  --white:#ffffff; 
+  --radius:12px;
+}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Inter, sans-serif;}
+body{background:var(--bg-gradient);color:var(--white);line-height:1.6;}
+a{text-decoration:none;color:inherit;transition:0.2s;}
+a:hover{color:var(--accent);}
+.container{max-width:1100px;margin:0 auto;padding:28px;}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:40px;}
+.logo{display:flex;align-items:center;gap:12px;}
+.logo .mark{width:50px;height:50px;border-radius:var(--radius);background:linear-gradient(135deg,var(--accent),#06b6d4);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.4rem;}
+nav a{margin-left:24px;font-weight:500;color:var(--muted);}
+nav a:hover{color:var(--accent);cursor:pointer;}
+
+section{padding:80px 20px; display:flex; flex-direction:column; align-items:center; text-align:center;}
+section + section{margin-top:100px;} 
+
+#home{min-height:80vh; display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:30px;}
+#home .hero-text{max-width:600px; color: var(--white);}
+#home .hero-btn{display:none;}
+
+.products-wrapper{overflow-x:auto;width:100%;padding-bottom:20px;}
+.products{display:flex;gap:24px;flex-wrap:nowrap;}
+.products::-webkit-scrollbar{height:10px;}
+.products::-webkit-scrollbar-thumb{background:var(--accent);border-radius:10px;}
+
+.card{
+  background:var(--card);
+  padding:20px;
+  border-radius:var(--radius);
+  border:1px solid rgba(255,255,255,0.05);
+  transition:0.2s;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  min-width:200px;
+  overflow:hidden;
+}
+.card:hover{border-color:var(--accent);transform:translateY(-4px);}
+.card h3{margin-bottom:12px;font-size:1.2rem;}
+.card p{color:var(--muted);flex-grow:1;}
+.card .btn{margin-top:15px;padding:10px 16px;border-radius:var(--radius);background:var(--accent);color:var(--white);text-align:center;font-weight:600;}
+.card img{width:100%; display:block;}
+
+#apropos p{color:var(--muted); max-width:700px; text-align:center;}
+
+#reseaux .socials{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;}
+#reseaux .socials a{display:flex;align-items:center;gap:8px;color:var(--white);text-decoration:none;padding:10px 14px;background:var(--card);border-radius:12px;border:1px solid rgba(255,255,255,0.05);}
+#reseaux .socials a:hover{border-color:var(--accent);transform:translateY(-2px);}
+
+.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);display:flex;justify-content:center;align-items:center;opacity:0;pointer-events:none;transition:0.3s;}
+.modal.active{opacity:1;pointer-events:auto;}
+.modal-content{background:var(--card);padding:30px;border-radius:var(--radius);max-width:500px;width:90%;position:relative;}
+.modal-content h2{text-align:center;margin-bottom:20px;}
+.modal-content form{display:flex;flex-direction:column;gap:14px;}
+.modal-content input, .modal-content textarea{padding:12px;border-radius:var(--radius);border:1px solid rgba(255,255,255,0.05);background:transparent;color:var(--white);}
+.modal-content .form-buttons{display:flex;gap:12px;justify-content:center;margin-top:12px;}
+.modal-content .form-buttons button{padding:12px 20px;border-radius:var(--radius);font-weight:600;cursor:pointer;}
+.modal-content .form-buttons .btn{background:var(--accent);color:var(--white);border:none;}
+.modal-content .form-buttons button[type="button"]{background:transparent;border:1px solid rgba(255,255,255,0.05);color:var(--white);}
+.modal .close{position:absolute;top:12px;right:12px;font-size:18px;cursor:pointer;color:var(--muted);}
+.modal .close:hover{color:var(--accent);}
+
+footer{margin-top:80px;padding:20px 0;text-align:center;border-top:1px solid rgba(255,255,255,0.05);font-size:0.9rem;color:var(--muted);}
+
+@media(min-width:800px){
+  #home{flex-direction:row;text-align:left;gap:40px;justify-content:space-between;}
+  #home .hero-text{flex:1;}
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="logo">
+      <div class="mark">S</div>
+      <div>
+        <div style="font-weight:700;">Boutique de Comptes</div>
+        <div style="font-size:12px;color:var(--muted);"> • Steam • </div>
+      </div>
+    </div>
+    <nav>
+      <a href="#home">Accueil</a>
+      <a href="#products">Produits</a>
+      <a id="contactBtn">Nous contacter</a>
+      <a href="#apropos">À propos</a>
+      <a href="#reseaux">Réseaux</a>
+    </nav>
+  </header>
+
+  <section id="home">
+    <div class="hero-text">
+      <h1>Bienvenue sur notre boutique</h1>
+      <p>Achetez des comptes Steam fiables, sécurisés et prêts à l'emploi. Livraison rapide et support assuré.</p>
+    </div>
+    <img src="https://image.noelshack.com/fichiers/2025/50/4/1765411314-chatgpt-image-11-d-c-2025-00-57-34.jpg" alt="Illustration boutique" style="border-radius:var(--radius);max-width:400px;width:100%;">
+  </section>
+
+  <section id="products">
+    <h2>Nos Comptes Disponibles : </h2>
+    <div style="margin:30px 0;"></div>
+    <div class="products-wrapper">
+      <div class="products">
+
+        <div class="card">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/1024px-Steam_icon_logo.svg.png">
+          <h3>Compte Steam Premium</h3>
+          <p>Accès complet avec un jeux inclus de votre choix, historique propre et garanti.</p>
+          <p style="margin-top:8px;font-weight:700;"></p>
+          <a class="btn" href="produits/premium.html">Voir</a>
+        </div>
+
+        <div class="card">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/1024px-Steam_icon_logo.svg.png">
+          <h3>Compte Steam OG</h3>
+          <p>Compte ancien, propre et entièrement sécurisé, 3ans +.</p>
+          
+          <p style="margin-top:8px;font-weight:700;">€11.99</p>
+          <a class="btn" href="produits/steamog.html">Voir</a>
+        </div>
+
+        <div class="card">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/1024px-Steam_icon_logo.svg.png">
+          <h3>Clé steam </h3>
+          <p>clé steam contenant des jeux aléatoire disponible dans le martket place </p>
+          <p style="margin-top:8px;font-weight:700;">€1.00.</p>
+          <a class="btn" href="produits/name.html">Voir</a>
+        </div>
+
+        <div class="card">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/1024px-Steam_icon_logo.svg.png">
+          <h3>Compte Steam Basique</h3>
+          <p>Full acces aucun jeux / email original  </p>
+          <p style="margin-top:8px;font-weight:700;">€2.99</p>
+          <a class="btn" href="produits/basique.html">Voir</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="apropos">
+    <h2>À propos</h2>
+    <p>
+      Nous proposons des comptes fiables, vérifiés et sécurisés.  
+      Chaque compte est testé pour assurer un historique propre et une livraison immédiate.  
+      Support disponible 7j/7 en cas de problème.
+    </p>
+    <div style="margin:10px 0;"></div>
+    <p>La transaction se fait sous réservation par email ou par le discord avec ensuite un achat via carte cadeau steam ou skrill (comme paypal).</p><br>
+      <p>Attention : plusieurs comptes sont disponibles.<br>
+    Le compte affiché en capture n’est pas nécessairement celui que vous recevrez.
+</p>
+  </section>
+
+  <section id="reseaux">
+    <h2>Nos Réseaux</h2>
+    <p style="color:var(--muted); margin-bottom:20px;">Suivez nos nouveautés.</p>
+    <div class="socials">
+      <a href="https://steamcommunity.com/profiles/76561198391109740/" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg" width="24">
+        Steam
+      </a>
+      <a href="https://guns.lol/keywoz" target="_blank">
+        <img src="https://assets.guns.lol/guns_logo_no_background_cropped.png" width="24">
+        guns.lol
+      </a>
+            <a href="https://discord.gg/6WZ4tXycJk" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/fr/thumb/4/4f/Discord_Logo_sans_texte.svg/1818px-Discord_Logo_sans_texte.svg.png" width="24">
+        discord
+      </a>
+      </a>
+            <a href="" target="_blank">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7uQ4qhyY18r0caMSg_cuHG6lPxBGa23vGxg&s" width="24">
+        Skrill
+      </a>
+
+    </div>
+  </section>
+
+  <footer>© 2025 - Boutique de Comptes</footer>
+</div>
+
+<!-- Modal Contact avec Formspree -->
+<div class="modal" id="contactModal">
+  <div class="modal-content">
+    <span class="close" id="closeModal">&times;</span>
+    <h2>Nous contacter</h2>
+    <form action="https://formspree.io/f/mgvgpobb" method="POST">
+      <input type="text" name="name" placeholder="Votre nom" required>
+      <input type="email" name="email" placeholder="Votre email" required>
+      <textarea name="message" placeholder="Votre message" rows="4" required></textarea>
+      <div class="form-buttons">
+        <button class="btn" type="submit">Envoyer</button>
+        <button type="button" id="clearBtn">Effacer</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+const contactBtn=document.getElementById('contactBtn');
+const modal=document.getElementById('contactModal');
+const closeModal=document.getElementById('closeModal');
+const clearBtn=document.getElementById('clearBtn');
+
+contactBtn.onclick=()=>modal.classList.add('active');
+closeModal.onclick=()=>modal.classList.remove('active');
+window.onclick=e=>{if(e.target===modal)modal.classList.remove('active');}
+clearBtn.onclick=()=>modal.querySelector('form').reset();
+</script>
+
+</body>
+</html>
