@@ -1,199 +1,256 @@
 <!doctype html>
 <html lang="fr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>"name"</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Clé Steam Aléatoire — Keywoz Shop</title>
+    <link rel="icon" type="image/jpeg" href="https://image.noelshack.com/fichiers/2025/50/5/1765567128-keywoz-shop-3.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 
-<style>
-:root{
-  --bg:#0f1724;
-  --bg-gradient: linear-gradient(135deg, #0f1724, #1a1f2b);
-  --card:#0b1220;
-  --accent:#4f46e5;
-  --accent-hover:#6366f1;
-  --white:#eef2ff;
-  --muted:#9aa4b2;
-  --radius:12px;
-}
-body{
-  margin:0;
-  background:var(--bg-gradient);
-  color:var(--white);
-  font-family:Inter, sans-serif;
-}
-.container{
-  max-width:900px;
-  margin:0 auto;
-  padding:20px;
-}
-a{text-decoration:none;color:var(--accent);}
-header a{
-  display:inline-block;
-  margin-bottom:20px;
-  color:var(--muted);
-  transition: color 0.3s;
-}
-header a:hover{color:var(--accent);}
-.product-box{
-  background:var(--card);
-  padding:30px;
-  border-radius:var(--radius);
-  border:1px solid rgba(255,255,255,0.05);
-  box-shadow:0 4px 20px rgba(0,0,0,0.5);
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-.product-box:hover{
-  transform:translateY(-3px);
-  box-shadow:0 8px 30px rgba(0,0,0,0.6);
-}
-.product-box h1{
-  margin-top:0;
-  margin-bottom:15px;
-}
-.product-box p{
-  line-height:1.6;
-  color:var(--muted);
-}
-.product-box h2,h3{
-  margin-top:25px;
-}
-.buy-btn{
-  display:inline-block;
-  background:var(--accent);
-  padding:12px 24px;
-  font-weight:600;
-  border-radius:var(--radius);
-  margin-top:20px;
-  color:var(--white);
-  transition: background 0.3s, transform 0.2s;
-  cursor:pointer;
-}
-.buy-btn:hover{
-  background:var(--accent-hover);
-  transform:scale(1.05);
-}
-.product-gallery{
-  display:flex;
-  gap:20px;
-  overflow-x:auto;
-  margin-top:20px;
-  padding-bottom:10px;
-}
-.product-gallery img{
-  width:250px;
-  border-radius:var(--radius);
-  transition: transform 0.3s;
-  cursor:pointer;
-}
-.product-gallery img:hover{
-  transform:scale(1.05);
-}
-::-webkit-scrollbar{
-  height:8px;
-}
-::-webkit-scrollbar-thumb{
-  background:var(--accent);
-  border-radius:4px;
-}
-::-webkit-scrollbar-track{
-  background:rgba(255,255,255,0.05);
-}
+    <style>
+        :root {
+            --bg-dark: #050507;
+            --primary: #6366f1;
+            --secondary: #06b6d4;
+            --card: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --white: #ffffff;
+            --muted: #94a3b8;
+            --radius: 16px;
+        }
 
-/* Modal réservation */
-.modal{
-  position:fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background:rgba(0,0,0,0.7);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  opacity:0; pointer-events:none;
-  transition:0.3s;
-}
-.modal.active{opacity:1; pointer-events:auto;}
-.modal-content{
-  background:var(--card);
-  padding:30px;
-  border-radius:var(--radius);
-  max-width:500px; width:90%;
-  position:relative;
-}
-.modal-content h2{text-align:center; margin-bottom:20px;}
-.modal-content form{display:flex;flex-direction:column;gap:12px;}
-.modal-content input, .modal-content textarea{
-  padding:12px;
-  border-radius:var(--radius);
-  border:1px solid rgba(255,255,255,0.1);
-  background:#0b1220;
-  color:var(--white);
-}
-.modal-content input:focus, .modal-content textarea:focus{border-color:var(--accent);}
-.modal-content .form-buttons{display:flex; gap:12px; justify-content:center; margin-top:12px;}
-.modal-content .form-buttons button{padding:12px 20px; border-radius:var(--radius); font-weight:600; cursor:pointer; border:none;}
-.modal-content .form-buttons .btn{background:var(--accent); color:var(--white);}
-.modal-content .form-buttons button[type="button"]{background:transparent; border:1px solid rgba(255,255,255,0.1); color:var(--white);}
-.modal .close{position:absolute; top:12px; right:12px; font-size:18px; cursor:pointer; color:var(--muted);}
-.modal .close:hover{color:var(--accent);}
-</style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
+
+        body { 
+            background: var(--bg-dark); 
+            color: var(--white); 
+            line-height: 1.6; 
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- ARRIÈRE-PLAN VIVANT --- */
+        .bg-animate {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -2;
+            background: 
+                radial-gradient(circle at 50% 10%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 50% 90%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+            animation: meshMove 15s ease-in-out infinite alternate;
+        }
+
+        @keyframes meshMove {
+            0% { transform: translateY(-5%) scale(1); }
+            100% { transform: translateY(5%) scale(1.1); }
+        }
+
+        canvas#particleCanvas {
+            position: fixed;
+            top: 0; left: 0;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* --- STRUCTURE --- */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        header a {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: var(--muted);
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        header a:hover { color: var(--primary); transform: translateX(-5px); }
+
+        .product-box {
+            background: var(--card);
+            padding: 40px;
+            border-radius: var(--radius);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        .product-box h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to bottom, #fff 30%, var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .product-box p { color: var(--muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+        .price-tag {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin: 30px 0;
+            text-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .buy-btn {
+            display: inline-block;
+            background: var(--primary);
+            padding: 16px 40px;
+            font-weight: 800;
+            border-radius: 12px;
+            color: white;
+            text-decoration: none;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+        }
+
+        .buy-btn:hover {
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 0 15px 30px rgba(99, 102, 241, 0.5);
+        }
+
+        .product-gallery {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+        }
+        .product-gallery img {
+            max-width: 100%;
+            width: 400px;
+            border-radius: 15px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: 0.5s;
+        }
+        .product-gallery img:hover { transform: rotate(-2deg) scale(1.02); }
+
+        /* MODAL */
+        .modal {
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,0.85);
+            display: grid; place-items: center;
+            opacity: 0; pointer-events: none;
+            transition: 0.3s; z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        .modal.active { opacity: 1; pointer-events: auto; }
+        .modal-content {
+            background: #0f0f1a;
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 500px; width: 90%;
+            border: 1px solid var(--glass-border);
+            position: relative;
+            text-align: left;
+        }
+        .modal-content input, .modal-content textarea {
+            width: 100%; padding: 12px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px; color: white;
+            margin-bottom: 15px; outline: none;
+        }
+        .btn { width: 100%; background: var(--primary); color: white; padding: 14px; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; transition: 0.3s; }
+        .close { position: absolute; top: 15px; right: 20px; font-size: 24px; cursor: pointer; color: var(--muted); }
+    </style>
 </head>
 <body>
-<div class="container">
+    <div class="bg-animate"></div>
+    <canvas id="particleCanvas"></canvas>
 
-<header><a href="../index.html">← Retour à la boutique</a></header>
+    <div class="container">
+        <header><a href="../index.html">← Retour à la boutique</a></header>
 
-<div class="product-box">
-  <h1>Clé steam</h1>
+        <div class="product-box">
+            <h1>Clé Steam Aléatoire</h1>
 
-  <p>
-    • Clé steam contenant des jeux compris entre 9,99€ et 29.99€<br>
-    • Jeux AAA compris <br>
-    • Jeux indé compris 
-  </p>
+            <p>
+                Tentez votre chance avec nos clés mystères ! Chaque clé garantit un jeu d'une valeur marchande comprise entre <strong>9,99€ et 29,99€</strong>.<br><br>
+                • Jeux AAA et Indés inclus<br>
+                • Activation mondiale immédiate<br>
+                • 100% fonctionnel et officiel
+            </p>
 
-  <h2>Prix : 1.00€</h2>
-  <button class="buy-btn" id="reserveBtn">Réserver une clé steam</button>
+            <div class="price-tag">1.00€</div>
 
-  <h3></h3>
-  <div class="product-gallery">
-    <img src="https://image.noelshack.com/fichiers/2025/50/4/1765474022-key-steam.jpg" class="zoomable">
-  </div>
+            <button class="buy-btn" id="reserveBtn">Réserver ma clé steam</button>
 
-</div>
+            <div class="product-gallery">
+                <img src="https://image.noelshack.com/fichiers/2025/50/4/1765474022-key-steam.jpg" alt="Steam Key">
+            </div>
+        </div>
+    </div>
 
-</div>
-</div>
+    <div class="modal" id="reserveModal">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <h2 style="margin-bottom: 20px;">Réserver votre Clé</h2>
+            <form action="https://formspree.io/f/mgvgpobb" method="POST">
+                <input type="hidden" name="product" value="Clé Steam Aléatoire">
+                <input type="text" name="name" placeholder="Votre nom" required>
+                <input type="email" name="email" placeholder="Votre email" required>
+                <textarea name="message" placeholder="Combien de clés souhaitez-vous ?" rows="4" required></textarea>
+                <button type="submit" class="btn">Envoyer la demande</button>
+                <button type="button" id="clearBtn" style="background:transparent; color:var(--muted); border:none; margin-top:10px; cursor:pointer; width:100%;">Effacer</button>
+            </form>
+        </div>
+    </div>
 
-<!-- Modal réservation -->
-<div class="modal" id="reserveModal">
-  <div class="modal-content">
-    <span class="close" id="closeModal">&times;</span>
-    <h2>Réserver cette clé </h2>
-    <form action="https://formspree.io/f/mgvgpobb" method="POST">
-      <input type="hidden" name="product" value='Clé steam'>
-      <input type="text" name="name" placeholder="Votre nom" required>
-      <input type="email" name="email" placeholder="Votre email" required>
-      <textarea name="message" placeholder="Votre message / réservation..." rows="4" required></textarea>
-      <div class="form-buttons">
-        <button type="submit" class="btn">Envoyer</button>
-        <button type="button" id="clearBtn">Effacer</button>
-      </div>
-    </form>
-  </div>
-</div>
+    <script>
+        // Logic Modal
+        const reserveBtn = document.getElementById('reserveBtn');
+        const reserveModal = document.getElementById('reserveModal');
+        const closeModal = document.getElementById('closeModal');
+        const clearBtn = document.getElementById('clearBtn');
 
-<script>
-const reserveBtn = document.getElementById('reserveBtn');
-const reserveModal = document.getElementById('reserveModal');
-const closeModal = document.getElementById('closeModal');
-const clearBtn = document.getElementById('clearBtn');
+        reserveBtn.onclick = () => reserveModal.classList.add('active');
+        closeModal.onclick = () => reserveModal.classList.remove('active');
+        window.onclick = e => { if(e.target === reserveModal) reserveModal.classList.remove('active'); }
+        clearBtn.onclick = () => reserveModal.querySelector('form').reset();
 
-reserveBtn.onclick = () => reserveModal.classList.add('active');
-closeModal.onclick = () => reserveModal.classList.remove('active');
-window.onclick = e => { if(e.target === reserveModal) reserveModal.classList.remove('active'); }
-clearBtn.onclick = () => reserveModal.querySelector('form').reset();
-</script>
+        // Système de Particules
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resize);
+        resize();
 
+        class Particle {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 1.2;
+                this.speedX = (Math.random() - 0.5) * 0.4;
+                this.speedY = (Math.random() - 0.5) * 0.4;
+                this.opacity = Math.random() * 0.4;
+            }
+            update() {
+                this.x += this.speedX; this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
+            }
+            draw() {
+                ctx.fillStyle = `rgba(6, 182, 212, ${this.opacity})`;
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
+            }
+        }
+        for (let i = 0; i < 40; i++) particles.push(new Particle());
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
 </body>
 </html>
