@@ -1,235 +1,297 @@
 <!doctype html>
 <html lang="fr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Compte Steam OG</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Compte Steam OG — Keywoz Shop</title>
+    <link rel="icon" type="image/jpeg" href="https://image.noelshack.com/fichiers/2025/50/5/1765567128-keywoz-shop-3.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 
-<style>
-:root{
-  --bg:#0f1724;
-  --bg-gradient: linear-gradient(135deg, #0f1724, #1a1f2b);
-  --card:#0b1220;
-  --accent:#4f46e5;
-  --accent-hover:#6366f1;
-  --white:#eef2ff;
-  --muted:#9aa4b2;
-  --radius:12px;
-}
-body{
-  margin:0;
-  background:var(--bg-gradient);
-  color:var(--white);
-  font-family:Inter, sans-serif;
-}
-.container{
-  max-width:900px;
-  margin:0 auto;
-  padding:20px;
-}
-a{text-decoration:none;color:var(--accent);}
-header a{
-  display:inline-block;
-  margin-bottom:20px;
-  color:var(--muted);
-  transition: color 0.3s;
-}
-header a:hover{color:var(--accent);}
-.product-box{
-  background:var(--card);
-  padding:30px;
-  border-radius:var(--radius);
-  border:1px solid rgba(255,255,255,0.05);
-  box-shadow:0 4px 20px rgba(0,0,0,0.5);
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-.product-box:hover{
-  transform:translateY(-3px);
-  box-shadow:0 8px 30px rgba(0,0,0,0.6);
-}
-.product-box h1{
-  margin-top:0;
-  margin-bottom:15px;
-}
-.product-box p{
-  line-height:1.6;
-  color:var(--muted);
-}
-.product-box h2,h3{
-  margin-top:25px;
-}
-.buy-btn{
-  display:inline-block;
-  background:var(--accent);
-  padding:12px 24px;
-  font-weight:600;
-  border-radius:var(--radius);
-  margin-top:20px;
-  color:var(--white);
-  transition: background 0.3s, transform 0.2s;
-  cursor:pointer;
-}
-.buy-btn:hover{
-  background:var(--accent-hover);
-  transform:scale(1.05);
-}
-.product-gallery{
-  display:flex;
-  gap:20px;
-  overflow-x:auto;
-  margin-top:20px;
-  padding-bottom:10px;
-}
-.product-gallery img{
-  width:250px;
-  border-radius:var(--radius);
-  transition: transform 0.3s;
-  cursor:pointer;
-}
-.product-gallery img:hover{
-  transform:scale(1.05);
-}
+    <style>
+        :root {
+            --bg-dark: #050507;
+            --primary: #6366f1;
+            --secondary: #06b6d4;
+            --card: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --white: #ffffff;
+            --muted: #94a3b8;
+            --radius: 16px;
+        }
 
-/* Zoom popup */
-.image-popup{
-  position:fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background:rgba(0,0,0,0.85);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  z-index:9999;
-}
-.image-popup img{
-  max-width:90%;
-  max-height:90%;
-  border-radius:10px;
-  box-shadow:0 0 20px rgba(0,0,0,0.7);
-}
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
 
-/* Modal réservation */
-.modal{
-  position:fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background:rgba(0,0,0,0.7);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  opacity:0; pointer-events:none;
-  transition:0.3s;
-}
-.modal.active{opacity:1; pointer-events:auto;}
-.modal-content{
-  background:var(--card);
-  padding:30px;
-  border-radius:var(--radius);
-  max-width:500px; width:90%;
-  position:relative;
-}
-.modal-content h2{text-align:center; margin-bottom:20px;}
-.modal-content form{display:flex;flex-direction:column;gap:12px;}
-.modal-content input, .modal-content textarea{
-  padding:12px;
-  border-radius:var(--radius);
-  border:1px solid rgba(255,255,255,0.1);
-  background:#0b1220;
-  color:var(--white);
-}
-.modal-content input:focus, .modal-content textarea:focus{border-color:var(--accent);}
-.modal-content .form-buttons{display:flex; gap:12px; justify-content:center; margin-top:12px;}
-.modal-content .form-buttons button{padding:12px 20px; border-radius:var(--radius); font-weight:600; cursor:pointer; border:none;}
-.modal-content .form-buttons .btn{background:var(--accent); color:var(--white);}
-.modal-content .form-buttons button[type="button"]{background:transparent; border:1px solid rgba(255,255,255,0.1); color:var(--white);}
-.modal .close{position:absolute; top:12px; right:12px; font-size:18px; cursor:pointer; color:var(--muted);}
-.modal .close:hover{color:var(--accent);}
-</style>
+        body { 
+            background: var(--bg-dark); 
+            color: var(--white); 
+            line-height: 1.6; 
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- ARRIÈRE-PLAN VIVANT --- */
+        .bg-animate {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -2;
+            background: 
+                radial-gradient(circle at 80% 20%, rgba(99, 102, 241, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 20% 80%, rgba(6, 182, 212, 0.08) 0%, transparent 40%);
+            animation: meshMove 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes meshMove {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.2) translate(-1%, -1%); }
+        }
+
+        canvas#particleCanvas {
+            position: fixed;
+            top: 0; left: 0;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* --- STRUCTURE --- */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        header a {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: var(--muted);
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        header a:hover { color: var(--primary); transform: translateX(-5px); }
+
+        .product-box {
+            background: var(--card);
+            padding: 40px;
+            border-radius: var(--radius);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            transition: transform 0.3s;
+        }
+        .product-box:hover { transform: translateY(-5px); }
+
+        .product-box h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(to right, #fff, var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .product-box p { color: var(--muted); font-size: 1.1rem; }
+        .product-box strong { color: var(--secondary); }
+
+        .buy-btn {
+            display: inline-block;
+            background: var(--primary);
+            padding: 14px 32px;
+            font-weight: 800;
+            border-radius: 10px;
+            margin-top: 30px;
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .buy-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 25px rgba(99, 102, 241, 0.5);
+        }
+
+        /* GALLERIE SCREENSHOTS */
+        .product-gallery {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            margin-top: 25px;
+            padding-bottom: 15px;
+        }
+        .product-gallery img {
+            width: 280px;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            transition: 0.4s;
+            cursor: pointer;
+        }
+        .product-gallery img:hover { transform: scale(1.03); border-color: var(--primary); }
+
+        /* SCROLLBAR STYLE */
+        .product-gallery::-webkit-scrollbar { height: 6px; }
+        .product-gallery::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+
+        /* POPUP ZOOM */
+        .image-popup {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(5px);
+        }
+        .image-popup img { max-width: 90%; max-height: 90%; border-radius: 10px; border: 1px solid var(--glass-border); }
+
+        /* MODAL */
+        .modal {
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,0.85);
+            display: grid; place-items: center;
+            opacity: 0; pointer-events: none;
+            transition: 0.3s; z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        .modal.active { opacity: 1; pointer-events: auto; }
+        .modal-content {
+            background: #0f0f1a;
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 500px; width: 90%;
+            border: 1px solid var(--glass-border);
+            position: relative;
+        }
+        .modal-content input, .modal-content textarea {
+            width: 100%; padding: 12px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px; color: white;
+            margin-bottom: 15px; outline: none;
+        }
+        .btn { background: var(--primary); color: white; padding: 12px 24px; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; transition: 0.3s; }
+        .close { position: absolute; top: 15px; right: 20px; font-size: 24px; cursor: pointer; color: var(--muted); }
+    </style>
 </head>
 <body>
-<div class="container">
+    <div class="bg-animate"></div>
+    <canvas id="particleCanvas"></canvas>
 
-<header><a href="../index.html">← Retour à la boutique</a></header>
+    <div class="container">
+        <header><a href="../index.html">← Retour à la boutique</a></header>
 
-<div class="product-box">
-  <h1>Compte Steam OG</h1>
+        <div class="product-box">
+            <h1>Compte Steam OG</h1>
 
-  <p>
-    Accès complet, historique propre et garanti.  
-    Ce compte possède <strong>5 ans ou plus d’ancienneté</strong>, un profil clean et aucune sanction.<br><br>
-    • Full Access 100% sécurisé<br>
-    • Compte ancien<br>
-    • Aucun vac / aucun ban<br>
-    • Email modifiable<br>
-          <p>
-    Métode de transaction via email. <br>
-     Réserver votre compte ou passer par le discord pour l'achat. <br>
-     
-    </p>
-  </p>
+            <p>
+                Accès complet, historique propre et garanti.  
+                Ce compte possède <strong>5 ans ou plus d’ancienneté</strong>, un profil clean et aucune sanction.<br><br>
+                • Full Access 100% sécurisé<br>
+                • Badge d'ancienneté garanti<br>
+                • Aucun VAC / aucun ban<br>
+                • Email modifiable immédiatement
+            </p>
 
-  <h2>Prix : 11.99€</h2>
-  <button class="buy-btn" id="reserveBtn">Réserver ce compte</button>
-  <h3>Screenshots :</h3>
-  <div class="product-gallery">
-    <img src="https://image.noelshack.com/fichiers/2025/50/4/1765472330-capture-d-cran-2025-12-11-171644.png" class="zoomable">
-    <img src="https://image.noelshack.com/fichiers/2025/50/4/1765472330-capture-d-cran-2025-12-11-171639.png" class="zoomable">
-  </div>
+            <p style="margin-top: 20px;">
+                Méthode de transaction via email.<br> 
+                Réservez votre compte ou passez par le Discord pour l'achat.
+            </p>
 
-</div>
+            <h2 style="margin-top: 30px; color: var(--primary); font-size: 2rem;">11.99€</h2>
+            <button class="buy-btn" id="reserveBtn">Réserver ce compte</button>
 
-</div>
+            <h3 style="margin-top: 40px;">Screenshots :</h3>
+            <div class="product-gallery">
+                <img src="https://image.noelshack.com/fichiers/2025/50/4/1765472330-capture-d-cran-2025-12-11-171644.png" class="zoomable">
+                <img src="https://image.noelshack.com/fichiers/2025/50/4/1765472330-capture-d-cran-2025-12-11-171639.png" class="zoomable">
+            </div>
+        </div>
+    </div>
 
-<!-- POPUP IMAGE -->
-<div class="image-popup" id="imgPopup">
-  <img id="popupImg">
-</div>
+    <div class="image-popup" id="imgPopup">
+        <img id="popupImg">
+    </div>
 
-<!-- Modal réservation -->
-<div class="modal" id="reserveModal">
-  <div class="modal-content">
-    <span class="close" id="closeModal">&times;</span>
-    <h2>Réserver le compte steam og</h2>
-    <form action="https://formspree.io/f/mgvgpobb" method="POST">
-      <input type="hidden" name="product" value="Compte Steam OG">
-      <input type="text" name="name" placeholder="Votre nom" required>
-      <input type="email" name="email" placeholder="Votre email" required>
-      <textarea name="message" placeholder="Votre message / réservation..." rows="4" required></textarea>
-      <div class="form-buttons">
-        <button type="submit" class="btn">Envoyer</button>
-        <button type="button" id="clearBtn">Effacer</button>
-      </div>
-    </form>
-  </div>
-</div>
+    <div class="modal" id="reserveModal">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <h2 style="margin-bottom: 20px;">Réserver le compte OG</h2>
+            <form action="https://formspree.io/f/mgvgpobb" method="POST">
+                <input type="hidden" name="product" value="Compte Steam OG">
+                <input type="text" name="name" placeholder="Votre nom" required>
+                <input type="email" name="email" placeholder="Votre email" required>
+                <textarea name="message" placeholder="Votre message / réservation..." rows="4" required></textarea>
+                <div style="display: flex; gap: 10px;">
+                    <button type="submit" class="btn">Envoyer</button>
+                    <button type="button" id="clearBtn" class="btn" style="background: transparent; border: 1px solid var(--glass-border);">Effacer</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
-<script>
-/* Modal réservation */
-const reserveBtn = document.getElementById('reserveBtn');
-const reserveModal = document.getElementById('reserveModal');
-const closeModal = document.getElementById('closeModal');
-const clearBtn = document.getElementById('clearBtn');
+    <script>
+        /* Modal réservation */
+        const reserveBtn = document.getElementById('reserveBtn');
+        const reserveModal = document.getElementById('reserveModal');
+        const closeModal = document.getElementById('closeModal');
+        const clearBtn = document.getElementById('clearBtn');
 
-reserveBtn.onclick = () => reserveModal.classList.add('active');
-closeModal.onclick = () => reserveModal.classList.remove('active');
-window.onclick = e => { if(e.target === reserveModal) reserveModal.classList.remove('active'); }
-clearBtn.onclick = () => reserveModal.querySelector('form').reset();
+        reserveBtn.onclick = () => reserveModal.classList.add('active');
+        closeModal.onclick = () => reserveModal.classList.remove('active');
+        window.onclick = e => { if(e.target === reserveModal) reserveModal.classList.remove('active'); }
+        clearBtn.onclick = () => reserveModal.querySelector('form').reset();
 
-/* ZOOM IMAGES */
-const popup = document.getElementById("imgPopup");
-const popupImg = document.getElementById("popupImg");
+        /* ZOOM IMAGES */
+        const popup = document.getElementById("imgPopup");
+        const popupImg = document.getElementById("popupImg");
 
-document.querySelectorAll(".zoomable").forEach(img => {
-  img.addEventListener("click", () => {
-    popupImg.src = img.src;
-    popup.style.display = "flex";
-  });
-});
+        document.querySelectorAll(".zoomable").forEach(img => {
+            img.addEventListener("click", () => {
+                popupImg.src = img.src;
+                popup.style.display = "flex";
+            });
+        });
 
-popup.addEventListener("click", () => {
-  popup.style.display = "none";
-});
-</script>
+        popup.addEventListener("click", () => { popup.style.display = "none"; });
 
+        /* SYSTÈME DE PARTICULES */
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Particle {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 1.5;
+                this.speedX = (Math.random() - 0.5) * 0.3;
+                this.speedY = (Math.random() - 0.5) * 0.3;
+                this.opacity = Math.random() * 0.5;
+            }
+            update() {
+                this.x += this.speedX; this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
+            }
+            draw() {
+                ctx.fillStyle = `rgba(99, 102, 241, ${this.opacity})`;
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
+            }
+        }
+        for (let i = 0; i < 50; i++) particles.push(new Particle());
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
 </body>
 </html>
