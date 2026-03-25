@@ -18,6 +18,13 @@ L'objectif principal était de créer un site fonctionnel et esthétique pour ap
 - Chaque produit est organisé dans un dossier spécifique pour faciliter la gestion
 - Le site reste un projet de **pratique et de démonstration** "mais je vend vraiment des comptes steam par contre !" Bien sur il n'est pas destiné à être reproduit ou cloné 
 
+## 🛠 Outils utilisées
+- HTML
+- CSS
+- Organisation de contenu
+
 ## 📝 Remarques
 Ce projet me sert à tester et améliorer mes compétences en développement web.  
 Il représente mon travail personnel et ma réflexion sur l’organisation et le design d’un site e-commerce.
+
+<img width="1339" height="995" alt="image" src="https://github.com/user-attachments/assets/11aaced5-605c-4448-9667-1fccfb8884d0" />
