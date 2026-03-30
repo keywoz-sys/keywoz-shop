@@ -1,6 +1,17 @@
 # Keywoz Shop https://keywoz-sys.github.io/keywoz-shop/
 
-*grosse update en cours login ne marche pas encore je boss dessus*
+##grosse update en cours login ne marche pas encore je boss dessus 
+
+Note de Maj 
+
+- ajout du panier, il permet de directement calculer le total prépare le message à envoyé efficace 
+- ajout avis client
+
+**A venir** 
+
+Login avec un dashboard et un suivi des commande ect..
+
+
 **Keywoz Shop** est mon projet personnel de boutique en ligne.  
 L'objectif principal était de créer un site fonctionnel et esthétique pour apprendre et expérimenter le HTML et le CSS, tout en organisant les produits et le design de manière professionnelle.
 
