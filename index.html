@@ -1,11 +1,14 @@
 <!doctype html>
 <html lang="fr">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Keywoz Shop — Premium Accounts</title>
-    <link rel="icon" type="image/jpeg" href="https://image.noelshack.com/fichiers/2025/50/5/1765567128-keywoz-shop-3.jpg">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/jpeg"
+        href="https://image.noelshack.com/fichiers/2025/50/5/1765567128-keywoz-shop-3.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --bg-dark: #050507;
@@ -19,37 +22,54 @@
             --radius: 16px;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
-        
-        body { 
-            background: var(--bg-dark); 
-            color: var(--text-main); 
-            line-height: 1.6; 
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
             overflow-x: hidden;
             position: relative;
         }
 
-        /* --- ARRIÈRE-PLAN ANIMÉ (VIVANT) --- */
+        /* --- ARRIÈRE-PLAN ANIMÉ  --- */
         .bg-animate {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             z-index: -2;
-            background: 
+            background:
                 radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
                 radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 40%);
             animation: meshMove 20s ease-in-out infinite alternate;
         }
 
         @keyframes meshMove {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.3) translate(2%, 2%); }
+            0% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(1.3) translate(2%, 2%);
+            }
         }
 
-        /* Effet de grain pour la texture premium */
+        /* Effet de grain */
         body::after {
             content: "";
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             z-index: -1;
             opacity: 0.02;
             pointer-events: none;
@@ -58,19 +78,25 @@
 
         canvas#particleCanvas {
             position: fixed;
-            top: 0; left: 0;
+            top: 0;
+            left: 0;
             z-index: -1;
             pointer-events: none;
         }
 
         /* --- FIN DES ANIMATIONS DE FOND --- */
 
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; position: relative; }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+        }
 
-        header { 
-            padding: 20px 0; 
-            display: flex; 
-            justify-content: space-between; 
+        header {
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
@@ -79,296 +105,1411 @@
             border-bottom: 1px solid var(--glass-border);
         }
 
-        .logo { display: flex; align-items: center; gap: 12px; }
-        .logo .mark { 
-            width: 35px; height: 35px; 
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo .mark {
+            width: 35px;
+            height: 35px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             border-radius: 10px;
-            display: grid; place-items: center;
+            display: grid;
+            place-items: center;
             font-weight: 800;
             animation: logoFloat 3s ease-in-out infinite;
             box-shadow: 0 0 15px rgba(99, 102, 241, 0.5);
         }
 
-        .logo-text-wrapper { animation: flagWave 4s ease-in-out infinite; transform-origin: left center; }
+        .logo-text-wrapper {
+            animation: flagWave 4s ease-in-out infinite;
+            transform-origin: left center;
+        }
 
         @keyframes flagWave {
-            0%, 100% { transform: skewY(0deg); }
-            25% { transform: skewY(2deg) translateY(-1px); }
-            75% { transform: skewY(-2deg) translateY(1px); }
+
+            0%,
+            100% {
+                transform: skewY(0deg);
+            }
+
+            25% {
+                transform: skewY(2deg) translateY(-1px);
+            }
+
+            75% {
+                transform: skewY(-2deg) translateY(1px);
+            }
         }
 
         @keyframes logoFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
         }
 
-        nav { display: flex; gap: 20px; }
-        nav a { color: var(--text-muted); font-weight: 600; text-decoration: none; font-size: 0.9rem; transition: 0.3s; cursor: pointer; }
-        nav a:hover { color: var(--primary); text-shadow: 0 0 8px rgba(99, 102, 241, 0.4); }
+        nav {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
 
-        section { padding: 140px 0; }
+        nav a {
+            color: var(--text-muted);
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            cursor: pointer;
+        }
 
-        #home { 
-            display: flex; 
+        nav a:hover {
+            color: var(--primary);
+            text-shadow: 0 0 8px rgba(99, 102, 241, 0.4);
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--primary);
+            transition: 0.3s;
+        }
+
+        .cart-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .auth-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .auth-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--secondary);
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 800;
+        }
+
+        section {
+            padding: 200px 0;
+        }
+
+        #home {
+            display: flex;
             flex-direction: column;
-            align-items: center; 
+            align-items: center;
             justify-content: center;
             text-align: center;
             min-height: 60vh;
         }
-        .hero-text { max-width: 800px; }
-        .hero-text h1 { 
-        font-size: clamp(2.5rem, 5vw, 4rem); 
-        margin-bottom: 20px; 
-        font-weight: 800;
-        background: linear-gradient(to bottom, #fff 40%, var(--primary));
-        -webkit-background-clip: text; /* Pour Chrome/Safari */
-        background-clip: text;         /* La propriété standard (pour la compatibilité) */
-        -webkit-text-fill-color: transparent;
-        }
-        .hero-text p { font-size: 1.2rem; color: var(--text-muted); }
 
-        .products-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); 
-            gap: 25px; 
+        .hero-text {
+            max-width: 800px;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 20px;
+            font-weight: 800;
+            background: linear-gradient(to bottom, #fff 40%, var(--primary));
+            -webkit-background-clip: text;
+            /* Pour Chrome/Safari */
+            background-clip: text;
+            /* La propriété standard (pour la compatibilité) */
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 25px;
             margin-top: 50px;
         }
 
-        .card { 
-            background: var(--glass); 
-            border: 1px solid var(--glass-border); 
-            border-radius: var(--radius); 
-            padding: 30px; 
+        .card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius);
+            padding: 30px;
             transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex; flex-direction: column;
+            display: flex;
+            flex-direction: column;
             backdrop-filter: blur(5px);
         }
-        .card:hover { 
-            border-color: var(--primary); 
-            transform: translateY(-10px); 
-            background: rgba(255,255,255,0.06);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+
+        .card:hover {
+            border-color: var(--primary);
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
         }
-        
-        .card img { 
-            width: 50px; 
-            margin-bottom: 20px; 
-            filter: drop-shadow(0 0 8px var(--primary)); 
+
+        .card img {
+            width: 50px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 8px var(--primary));
             transition: 0.3s;
         }
-        .card:hover img { filter: drop-shadow(0 0 12px var(--primary)) brightness(1.2); }
 
-        .card h3 { margin-bottom: 10px; font-size: 1.2rem; }
-        .card p { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 20px; flex-grow: 1; }
-        
-        .price { font-weight: 800; color: var(--primary); margin-bottom: 20px; font-size: 1.2rem; }
-        .btn-view { 
-            display: block; text-align: center; background: var(--primary); 
-            color: white; padding: 12px; border-radius: 8px; 
-            text-decoration: none; font-weight: 700; transition: 0.3s;
+        .card:hover img {
+            filter: drop-shadow(0 0 12px var(--primary)) brightness(1.2);
         }
-        .btn-view:hover { opacity: 0.9; transform: scale(1.05); box-shadow: 0 0 15px rgba(99, 102, 241, 0.4); }
 
-        #apropos { text-align: center; max-width: 800px; margin: 0 auto; }
-        #apropos h2 { margin-bottom: 30px; }
-        #apropos p { color: var(--text-muted); margin-bottom: 30px; font-size: 1.1rem; }
-        .info-box { background: var(--glass); padding: 30px; border-radius: var(--radius); border-left: 4px solid var(--secondary); margin-top: 20px; text-align: left; font-size: 0.95rem; }
+        .card h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
 
-        .socials { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 40px; }
-        .social-link { 
-            display: flex; align-items: center; gap: 10px; 
-            background: var(--glass); padding: 15px 25px; 
-            border-radius: 12px; border: 1px solid var(--glass-border);
-            text-decoration: none; color: white; transition: 0.3s;
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .price {
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .btn-view {
+            display: block;
+            text-align: center;
+            background: var(--primary);
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .btn-view:hover {
+            opacity: 0.9;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
+        }
+
+        #apropos {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        #apropos h2 {
+            margin-bottom: 30px;
+        }
+
+        #apropos p {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .info-box {
+            background: var(--glass);
+            padding: 30px;
+            border-radius: var(--radius);
+            border-left: 4px solid var(--secondary);
+            margin-top: 20px;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        .socials {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--glass);
+            padding: 15px 25px;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            text-decoration: none;
+            color: white;
+            transition: 0.3s;
             backdrop-filter: blur(5px);
         }
-        .social-link:hover { border-color: var(--primary); transform: translateY(-3px); background: rgba(255,255,255,0.05); }
 
-        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: grid; place-items: center; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 1000; backdrop-filter: blur(8px); }
-        .modal.active { opacity: 1; pointer-events: auto; }
-        .modal-content { background: #0f0f1a; padding: 30px; border-radius: 20px; width: 90%; max-width: 450px; position: relative; border: 1px solid var(--glass-border); }
-        .close { position: absolute; top: 15px; right: 20px; cursor: pointer; font-size: 20px; color: var(--text-muted); }
-        input, textarea { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); padding: 12px; border-radius: 10px; color: white; margin-bottom: 15px; outline: none; }
-        .submit-btn { width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; transition: 0.3s; }
-        .submit-btn:hover { background: #4f46e5; }
-
-        footer { text-align: center; padding: 60px 0; color: var(--text-muted); font-size: 0.8rem; border-top: 1px solid var(--glass-border); position: relative; }
-    </style>
-</head>
-<body>
-
-<div class="bg-animate"></div>
-<canvas id="particleCanvas"></canvas>
-
-<div class="container">
-    <header>
-        <div class="logo">
-            <div class="mark">S</div>
-            <div class="logo-text-wrapper">
-                <div style="font-weight:800;">KEYWOZ SHOP</div>
-                <div style="font-size:10px; color:var(--primary);">• COMPTE STEAM •</div>
-            </div>
-        </div>
-        <nav>
-            <a href="#home">Accueil</a>
-            <a href="#products">Produits</a>
-            <a id="contactBtn">Contact</a>
-            <a href="#apropos">À propos</a>
-            <a href="#reseaux">Réseaux</a>
-        </nav>
-    </header>
-
-    <section id="home">
-        <div class="hero-text">
-            <h1>Comptes Steam <span>Fiables</span></h1>
-            <p>Sécurisés / aucun ban et livrés instantanément.<br>Rejoignez la communauté Steam dès aujourd'hui.</p>
-        </div>
-    </section>
-
-    <section id="products">
-        <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 20px;">Nos Catalogues</h2>
-        <div class="products-grid">
-            <div class="card">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/960px-Steam_icon_logo.svg.png">
-                <h3>Steam Premium</h3>
-                <p>Accès complet, jeu au choix inclus. Historique propre.</p>
-                <div class="price">Sur mesure</div>
-                <a href="produits/premium.html" class="btn-view">Détails</a>
-            </div>
-
-            <div class="card">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/960px-Steam_icon_logo.svg.png">
-                <h3>Steam OG</h3>
-                <p>Comptes anciens (3 ans+), sécurisés et rares.</p>
-                <div class="price">11.99€</div>
-                <a href="produits/steamog.html" class="btn-view">Détails</a>
-            </div>
-
-            <div class="card">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/960px-Steam_icon_logo.svg.png">
-                <h3>Clé Steam Aléatoire</h3>
-                <p>Clés contenant des jeux aléatoires du marketplace.</p>
-                <div class="price">1.00€</div>
-                <a href="produits/name.html" class="btn-view">Détails</a>
-            </div>
-
-            <div class="card">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/960px-Steam_icon_logo.svg.png">
-                <h3>Steam Basique</h3>
-                <p>Full accès, sans jeux, email original inclus.</p>
-                <div class="price">2.99€</div>
-                <a href="produits/basique.html" class="btn-view">Détails</a>
-            </div>
-        </div>
-    </section>
-
-    <section id="apropos">
-        <h2>À propos de nous</h2>
-        <p>Nous fournissons des comptes vérifiés manuellement pour garantir une sécurité totale à nos clients. Support 7j/7 disponible pour vous accompagner.</p>
-        <div class="info-box">
-            <strong>Méthode de paiement :</strong> Réservation via email/Discord. Paiement par carte cadeau Steam ou PayPal.<br><br>
-            <strong>Note :</strong> Les captures d'écran sont illustratives, chaque compte possède des caractéristiques uniques.
-        </div>
-    </section>
-
-    <section id="reseaux">
-        <h2 style="text-align: center; margin-bottom: 30px;">Nous suivre</h2>
-        <div class="socials">
-            <a href="https://steamcommunity.com/profiles/76561198391109740/" class="social-link" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg" width="20"> Steam
-            </a>
-            <a href="https://guns.lol/keywoz" class="social-link" target="_blank">
-                <img src="https://assets.guns.lol/guns_logo_no_background_cropped.png" width="20"> Guns.lol
-            </a>
-            <a href="https://discord.com/users/781139760848175135" class="social-link" target="_blank">
-                <img src="https://img.icons8.com/?size=100&id=30998&format=png&color=000000" width="20"> Discord
-            </a>
-        </div>
-    </section>
-
-    <footer>© 2026 Keywoz Shop — Tous droits réservés</footer>
-</div>
-
-<div class="modal" id="contactModal">
-    <div class="modal-content">
-        <span class="close" id="closeModal">&times;</span>
-        <h2>Contactez-nous</h2>
-        <form action="https://formspree.io/f/mgvgpobb" method="POST">
-            <input type="text" name="name" placeholder="Votre Nom" required>
-            <input type="email" name="email" placeholder="Votre Email" required>
-            <textarea name="message" placeholder="Détaillez votre demande..." rows="4" required></textarea>
-            <button type="submit" class="submit-btn">Envoyer le message</button>
-        </form>
-    </div>
-</div>
-
-<script>
-    // --- GESTION DU MODAL ---
-    const contactBtn = document.getElementById('contactBtn');
-    const modal = document.getElementById('contactModal');
-    const closeModal = document.getElementById('closeModal');
-
-    contactBtn.onclick = () => modal.classList.add('active');
-    closeModal.onclick = () => modal.classList.remove('active');
-    window.onclick = (e) => { if(e.target === modal) modal.classList.remove('active'); }
-
-    // --- SYSTÈME DE PARTICULES ---
-    const canvas = document.getElementById('particleCanvas');
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-
-    function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-
-    window.addEventListener('resize', resize);
-    resize();
-
-    class Particle {
-        constructor() {
-            this.reset();
+        .social-link:hover {
+            border-color: var(--primary);
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.05);
         }
-        reset() {
-            this.x = Math.random() * canvas.width;
-            this.y = Math.random() * canvas.height;
-            this.size = Math.random() * 1.5 + 0.5;
-            this.speedX = (Math.random() - 0.5) * 0.4;
-            this.speedY = (Math.random() - 0.5) * 0.4;
-            this.opacity = Math.random() * 0.5 + 0.1;
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            display: grid;
+            place-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.3s;
+            z-index: 1000;
+            backdrop-filter: blur(8px);
         }
-        update() {
-            this.x += this.speedX;
-            this.y += this.speedY;
-            if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
-                this.reset();
+
+        .modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background: #0f0f1a;
+            padding: 30px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 450px;
+            position: relative;
+            border: 1px solid var(--glass-border);
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            cursor: pointer;
+            font-size: 20px;
+            color: var(--text-muted);
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            padding: 12px;
+            border-radius: 10px;
+            color: white;
+            margin-bottom: 15px;
+            outline: none;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #4f46e5;
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 0;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--glass-border);
+            position: relative;
+        }
+
+        /* --- PANIER SIDEBAR --- */
+        .cart-sidebar {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            width: 400px;
+            height: 100vh;
+            background: var(--bg-accent);
+            border-left: 1px solid var(--glass-border);
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(10px);
+            overflow-y: auto;
+        }
+
+        @media (max-width: 768px) {
+            .cart-sidebar {
+                width: 100%;
+                right: -100%;
             }
         }
-        draw() {
-            ctx.fillStyle = `rgba(99, 102, 241, ${this.opacity})`;
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fill();
+
+        .cart-sidebar.open {
+            right: 0;
         }
-    }
 
-    // Création initiale des particules
-    for (let i = 0; i < 60; i++) {
-        particles.push(new Particle());
-    }
+        .cart-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            background: var(--bg-accent);
+        }
 
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        particles.forEach(p => {
-            p.update();
-            p.draw();
+        .cart-header h2 {
+            font-size: 1.3rem;
+        }
+
+        .cart-header .close {
+            cursor: pointer;
+            font-size: 24px;
+            color: var(--text-muted);
+        }
+
+        .cart-header .close:hover {
+            color: var(--primary);
+        }
+
+        .cart-items {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .cart-item {
+            background: var(--glass);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border: 1px solid var(--glass-border);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .cart-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+        }
+
+        .cart-item-name {
+            font-weight: 600;
+            color: white;
+            flex: 1;
+        }
+
+        .cart-item-price {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .cart-item-remove {
+            cursor: pointer;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            transition: 0.3s;
+        }
+
+        .cart-item-remove:hover {
+            color: #ff6b6b;
+        }
+
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 8px 12px;
+            border-radius: 8px;
+            width: fit-content;
+        }
+
+        .quantity-btn {
+            width: 24px;
+            height: 24px;
+            border: none;
+            background: var(--primary);
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .quantity-btn:hover {
+            background: #4f46e5;
+            transform: scale(1.1);
+        }
+
+        .quantity-input {
+            width: 40px;
+            text-align: center;
+            background: transparent;
+            border: none;
+            color: white;
+            font-weight: 600;
+        }
+
+        .cart-empty {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+        }
+
+        .cart-empty svg {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .cart-footer {
+            padding: 20px;
+            border-top: 1px solid var(--glass-border);
+            background: var(--bg-accent);
+            position: sticky;
+            bottom: 0;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .cart-total-price {
+            color: var(--primary);
+            font-size: 1.4rem;
+        }
+
+        .btn-checkout {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 1rem;
+        }
+
+        .btn-checkout:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-addcart {
+            background: var(--secondary);
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            display: block;
+        }
+
+        .btn-addcart:hover {
+            opacity: 0.9;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
+        }
+
+        /* === CAROUSEL AVIS === */
+        #avis {
+            padding: 60px 0;
+            border-top: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        #avis h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+        }
+
+        .carousel-wrapper {
+            max-width: 100%;
+            overflow: hidden;
+            position: relative;
+            mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+        }
+
+        .carousel {
+            display: flex;
+            gap: 20px;
+            animation: autoScroll 20s linear infinite;
+            width: 100%;
+        }
+
+        .carousel:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes autoScroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .carousel-item {
+            flex: 0 0 280px;
+            min-width: 280px;
+        }
+
+        .review-card {
+            background: var(--glass);
+            padding: 20px;
+            border-radius: var(--radius);
+            border: 1px solid var(--glass-border);
+            text-align: center;
+            backdrop-filter: blur(10px);
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .review-card:hover {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .verified-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            border: 1px solid rgba(34, 197, 94, 0.4);
+        }
+
+        .review-stars {
+            font-size: 1.2rem;
+            color: #fbbf24;
+            letter-spacing: 1px;
+            margin-top: 15px;
+        }
+
+        .review-text {
+            font-size: 0.85rem;
+            font-style: italic;
+            color: var(--text-muted);
+            line-height: 1.5;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .review-meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .review-author {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.8rem;
+        }
+
+        .review-platform {
+            font-size: 0.75rem;
+            color: var(--secondary);
+            margin-top: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .platform-icon {
+            width: 12px;
+            height: 12px;
+        }
+
+        @media (max-width: 768px) {
+            #avis h2 {
+                font-size: 1.5rem;
+            }
+
+            .carousel-item {
+                flex: 0 0 240px;
+                min-width: 240px;
+            }
+
+            .review-card {
+                padding: 18px;
+                height: 190px;
+            }
+
+            .verified-badge {
+                font-size: 0.7rem;
+                padding: 3px 6px;
+            }
+        }
+
+        /* === ANIMATION AJOUT AU PANIER === */
+        .cart-particle {
+            position: fixed;
+            pointer-events: none;
+            font-size: 2rem;
+            z-index: 500;
+            animation: flyToCart 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            opacity: 1;
+        }
+
+        @keyframes flyToCart {
+            0% {
+                opacity: 1;
+                transform: translateX(0) translateY(0) scale(1) rotateZ(0deg);
+            }
+            50% {
+                opacity: 0.8;
+                transform: translateX(100px) translateY(-50px) scale(0.8) rotateZ(180deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(var(--target-x)) translateY(var(--target-y)) scale(0) rotateZ(360deg);
+            }
+        }
+
+        .add-to-cart-toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 1001;
+            animation: slideInToast 0.5s ease-out forwards;
+            font-weight: 600;
+        }
+
+        @keyframes slideInToast {
+            0% {
+                opacity: 0;
+                transform: translateY(20px) translateX(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) translateX(0);
+            }
+        }
+
+        .toast-leave {
+            animation: slideOutToast 0.5s ease-in forwards !important;
+        }
+
+        @keyframes slideOutToast {
+            0% {
+                opacity: 1;
+                transform: translateY(0) translateX(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(20px) translateX(20px);
+            }
+        }
+
+        .confetti-burst {
+            position: fixed;
+            pointer-events: none;
+            z-index: 500;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            animation: confettiFall 2s ease-out forwards;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                opacity: 1;
+                transform: translateY(0) rotateX(0) rotateZ(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100px) rotateX(360deg) rotateZ(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bg-animate"></div>
+    <canvas id="particleCanvas"></canvas>
+
+    <div class="container">
+        <header>
+            <div class="logo">
+                <div class="mark">S</div>
+                <div class="logo-text-wrapper">
+                    <div style="font-weight:800;">KEYWOZ SHOP</div>
+                    <div style="font-size:10px; color:var(--primary);">• COMPTE STEAM •</div>
+                </div>
+            </div>
+            <nav>
+                <a href="#home">Accueil</a>
+                <a href="#products">Produits</a>
+                <a id="contactBtn">Contact</a>
+                <a href="#apropos">À propos</a>
+                <a href="#reseaux">Réseaux</a>
+                <div class="cart-icon" id="cartIcon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <circle cx="9" cy="21" r="1" />
+                        <circle cx="20" cy="21" r="1" />
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                    </svg>
+                    <div class="cart-count" id="cartCount">0</div>
+                </div>
+                <a id="dashboardLink" href="dashboard.html" style="display:none;">📊 Tableau</a>
+                <a id="authBtn" href="login.html" class="auth-btn">Connexion</a>
+            </nav>
+        </header>
+
+        <section id="home">
+            <div class="hero-text">
+                <h1>Comptes Steam <span>Fiables</span></h1>
+                <p>Sécurisés / aucun ban et livrés instantanément.<br>Rejoignez la communauté Steam dès aujourd'hui.</p>
+            </div>
+        </section>
+
+        <section id="products">
+            <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 20px;">Nos Catalogues</h2>
+            <div class="products-grid">
+                <div class="card" data-product-id="1" data-product-name="Steam Premium" data-product-price="Devis">
+                    <img
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/960px-Steam_icon_logo.svg.png">
+                    <h3>Steam Premium</h3>
+                    <p>Accès complet, jeu au choix inclus. Historique propre.</p>
+                    <div class="price">Sur mesure</div>
+                    <div style="display: flex; gap: 10px; flex-direction: column;">
+                        <a href="produits/premium.html" class="btn-view">Détails</a>
+                        <button class="btn-addcart" onclick="addToCart(this)">Ajouter au panier</button>
+                    </div>
+                </div>
+
+                <div class="card" data-product-id="2" data-product-name="Steam OG" data-product-price="11.99">
+                    <img
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/960px-Steam_icon_logo.svg.png">
+                    <h3>Steam OG</h3>
+                    <p>Comptes anciens (3 ans+), sécurisés et rares.</p>
+                    <div class="price">11.99€</div>
+                    <div style="display: flex; gap: 10px; flex-direction: column;">
+                        <a href="produits/steamog.html" class="btn-view">Détails</a>
+                        <button class="btn-addcart" onclick="addToCart(this)">Ajouter au panier</button>
+                    </div>
+                </div>
+
+                <div class="card" data-product-id="3" data-product-name="Clé Steam Aléatoire" data-product-price="1.00">
+                    <img
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/960px-Steam_icon_logo.svg.png">
+                    <h3>Clé Steam Aléatoire</h3>
+                    <p>Clés contenant des jeux aléatoires du marketplace.</p>
+                    <div class="price">1.00€</div>
+                    <div style="display: flex; gap: 10px; flex-direction: column;">
+                        <a href="produits/name.html" class="btn-view">Détails</a>
+                        <button class="btn-addcart" onclick="addToCart(this)">Ajouter au panier</button>
+                    </div>
+                </div>
+
+                <div class="card" data-product-id="4" data-product-name="Steam Basique" data-product-price="2.99">
+                    <img
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/960px-Steam_icon_logo.svg.png">
+                    <h3>Steam Basique</h3>
+                    <p>Full accès, sans jeux, email original inclus.</p>
+                    <div class="price">2.99€</div>
+                    <div style="display: flex; gap: 10px; flex-direction: column;">
+                        <a href="produits/basique.html" class="btn-view">Détails</a>
+                        <button class="btn-addcart" onclick="addToCart(this)">Ajouter au panier</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="avis">
+            <h2>Avis Clients</h2>
+            <div class="carousel-wrapper">
+                <div class="carousel" id="carouselTrack">
+                    <div class="carousel-item">
+                        <div class="review-card">
+                            <div class="verified-badge">✓ Verified</div>
+                            <p class="review-stars">⭐⭐⭐⭐⭐</p>
+                            <p class="review-text">"Service impeccable ! J'ai reçu mon compte instant après le paiement."</p>
+                            <div class="review-meta">
+                                <div class="review-author">13 Mars, 2026</div>
+                                <div class="review-platform">Discord</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="review-card">
+                            <div class="verified-badge">✓ Verified</div>
+                            <p class="review-stars">⭐⭐⭐⭐⭐</p>
+                            <p class="review-text">"Meilleur rapport qualité/prix ! Compte vraiment clean."</p>
+                            <div class="review-meta">
+                                <div class="review-author">25 déc, 2025</div>
+                                <div class="review-platform">Email</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="review-card">
+                            <div class="verified-badge">✓ Verified</div>
+                            <p class="review-stars">⭐⭐⭐⭐⭐</p>
+                            <p class="review-text">"Aucun risque de ban, compte stable depuis des mois."</p>
+                            <div class="review-meta">
+                                <div class="review-author">8 Nov, 2025</div>
+                                <div class="review-platform">Discord</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="review-card">
+                            <div class="verified-badge">✓ Verified</div>
+                            <p class="review-stars">⭐⭐⭐⭐⭐</p>
+                            <p class="review-text">"Livraison instantanée après paiement et compte en parfait état."</p>
+                            <div class="review-meta">
+                                <div class="review-author">2 fév, 2026</div>
+                                <div class="review-platform">Email</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="review-card">
+                            <div class="verified-badge">✓ Verified</div>
+                            <p class="review-stars">⭐⭐⭐⭐⭐</p>
+                            <p class="review-text">"Super service ! Support réactif et compte 100% safe."</p>
+                            <div class="review-meta">
+                                <div class="review-author">19 jan, 2026</div>
+                                <div class="review-platform">Discord</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="review-card">
+                            <div class="verified-badge">✓ Verified</div>
+                            <p class="review-stars">⭐⭐⭐⭐⭐</p>
+                            <p class="review-text">"Super rapide, et à l'écoute."</p>
+                            <div class="review-meta">
+                                <div class="review-author">7 jan, 2026</div>
+                                <div class="review-platform">Email</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="review-card">
+                            <div class="verified-badge">✓ Verified</div>
+                            <p class="review-stars">⭐⭐⭐⭐⭐</p>
+                            <p class="review-text">"Fiable et professionnel. Je recommande vivement !"</p>
+                            <div class="review-meta">
+                                <div class="review-author">15 fév, 2026</div>
+                                <div class="review-platform">Discord</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="review-card">
+                            <div class="verified-badge">✓ Verified</div>
+                            <p class="review-stars">⭐⭐⭐⭐⭐</p>
+                            <p class="review-text">"Meilleure plateforme pour acheter des comptes Steam."</p>
+                            <div class="review-meta">
+                                <div class="review-author">28 déc, 2025</div>
+                                <div class="review-platform">Email</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="apropos">
+            <h2>À propos de nous</h2>
+            <p>Nous fournissons des comptes vérifiés manuellement pour garantir une sécurité totale à nos clients.
+                Support 7j/7 disponible pour vous accompagner.</p>
+            <div class="info-box">
+                <strong>Méthode de paiement :</strong> Réservation via email/Discord. Paiement par carte cadeau Steam ou
+                PayPal.<br><br>
+                <strong>Note :</strong> Les captures d'écran sont illustratives, chaque compte possède des
+                caractéristiques uniques.
+            </div>
+        </section>
+
+        <section id="reseaux">
+            <h2 style="text-align: center; margin-bottom: 30px;">Nous suivre</h2>
+            <div class="socials">
+                <a href="https://steamcommunity.com/profiles/76561198391109740/" class="social-link" target="_blank">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg" width="20"> Steam
+                </a>
+                <a href="https://guns.lol/keywoz" class="social-link" target="_blank">
+                    <img src="https://assets.guns.lol/guns_logo_no_background_cropped.png" width="20"> Guns.lol
+                </a>
+                <a href="https://discord.com/users/781139760848175135" class="social-link" target="_blank">
+                    <img src="https://img.icons8.com/?size=100&id=30998&format=png&color=000000" width="20"> Discord
+                </a>
+            </div>
+        </section>
+
+        <footer>© 2026 Keywoz Shop — Tous droits réservés</footer>
+    </div>
+
+    <!-- PANIER SIDEBAR -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2>Votre Panier</h2>
+            <span class="close" id="closeCart">&times;</span>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="cart-empty">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <circle cx="9" cy="21" r="1" />
+                    <circle cx="20" cy="21" r="1" />
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                </svg>
+                <p>Votre panier est vide</p>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total :</span>
+                <span class="cart-total-price" id="cartTotal">0,00€</span>
+            </div>
+            <button class="btn-checkout" onclick="checkout()">Procéder au paiement</button>
+        </div>
+    </div>
+
+    <div class="modal" id="contactModal">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <h2>Contactez-nous</h2>
+            <form action="https://formspree.io/f/mgvgpobb" method="POST">
+                <input type="text" name="name" placeholder="Votre Nom" required>
+                <input type="email" name="email" placeholder="Votre Email" required>
+                <textarea name="message" placeholder="Détaillez votre demande..." rows="4" required></textarea>
+                <button type="submit" class="submit-btn">Envoyer le message</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // --- GESTION DU PANIER ---
+        let cart = [];
+
+        // Charger le panier depuis localStorage
+        function loadCart() {
+            const saved = localStorage.getItem('keywozCart');
+            if (saved) {
+                cart = JSON.parse(saved);
+                updateCartUI();
+            }
+        }
+
+        // Sauvegarder le panier dans localStorage
+        function saveCart() {
+            localStorage.setItem('keywozCart', JSON.stringify(cart));
+            updateCartUI();
+        }
+
+        // Ajouter un produit au panier
+        function addToCart(button) {
+            const card = button.closest('.card');
+            const productId = card.dataset.productId;
+            const productName = card.dataset.productName;
+            const productPrice = card.dataset.productPrice;
+
+            const existingItem = cart.find(item => item.id === productId);
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({
+                    id: productId,
+                    name: productName,
+                    price: productPrice,
+                    quantity: 1
+                });
+            }
+
+            saveCart();
+            
+            // Animations visuelles
+            animateAddToCart(button, productName);
+        }
+
+        // Animation du produit qui vole vers le panier
+        function animateAddToCart(button, productName) {
+            const buttonRect = button.getBoundingClientRect();
+            const cartIcon = document.getElementById('cartIcon');
+            const cartRect = cartIcon.getBoundingClientRect();
+
+            // Position relative
+            const startX = buttonRect.left + buttonRect.width / 2;
+            const startY = buttonRect.top + buttonRect.height / 2;
+            const endX = cartRect.left + cartRect.width / 2;
+            const endY = cartRect.top + cartRect.height / 2;
+
+            // Créer les éléments volants
+            createFlyingParticles(startX, startY, endX, endY);
+            createConfetti(startX, startY);
+            
+            // Animation du bouton
+            button.textContent = "✓ Ajouté !";
+            button.style.background = "var(--primary)";
+            button.style.transform = "scale(0.95)";
+            setTimeout(() => {
+                button.textContent = "Ajouter au panier";
+                button.style.background = "var(--secondary)";
+                button.style.transform = "scale(1)";
+            }, 1500);
+
+            // Toast notification
+            showAddToCartToast(productName);
+        }
+
+        // Créer les particules volantes
+        function createFlyingParticles(fromX, fromY, toX, toY) {
+            const emojis = ['🔹​'];
+            const particleCount = 8;
+            const offsetX = toX - fromX;
+            const offsetY = toY - fromY;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'cart-particle';
+                particle.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                particle.style.left = fromX + 'px';
+                particle.style.top = fromY + 'px';
+                particle.style.setProperty('--target-x', offsetX + (Math.random() - 0.5) * 100 + 'px');
+                particle.style.setProperty('--target-y', offsetY + (Math.random() - 0.5) * 100 + 'px');
+                
+                document.body.appendChild(particle);
+                
+                setTimeout(() => particle.remove(), 1200);
+            }
+        }
+
+        // Créer des confetti au point de départ
+        function createConfetti(x, y) {
+            const colors = ['#6366f1', '#06b6d4', '#fbbf24', '#ec4899', '#10b981'];
+            const confettiCount = 15;
+
+            for (let i = 0; i < confettiCount; i++) {
+                const piece = document.createElement('div');
+                piece.className = 'confetti-piece';
+                piece.style.left = x + (Math.random() - 0.5) * 20 + 'px';
+                piece.style.top = y + (Math.random() - 0.5) * 20 + 'px';
+                piece.style.width = (Math.random() * 6 + 4) + 'px';
+                piece.style.height = (Math.random() * 6 + 4) + 'px';
+                piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+                piece.style.animation = `confettiFall ${1.5 + Math.random() * 0.5}s ease-out forwards`;
+                piece.style.animationDelay = (Math.random() * 0.2) + 's';
+
+                document.body.appendChild(piece);
+                setTimeout(() => piece.remove(), 2000);
+            }
+        }
+
+        // Toast notification
+        function showAddToCartToast(productName) {
+            const existingToast = document.querySelector('.add-to-cart-toast');
+            if (existingToast) {
+                existingToast.classList.add('toast-leave');
+                setTimeout(() => existingToast.remove(), 500);
+            }
+
+            const toast = document.createElement('div');
+            toast.className = 'add-to-cart-toast';
+            toast.innerHTML = `
+                <span>✓</span>
+                <span>${productName} ajouté au panier !</span>
+            `;
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.add('toast-leave');
+                setTimeout(() => toast.remove(), 500);
+            }, 2500);
+        }
+
+        // Mettre à jour l'interface du panier
+        function updateCartUI() {
+            const cartItemsDiv = document.getElementById('cartItems');
+            const cartCountSpan = document.getElementById('cartCount');
+            const cartTotalSpan = document.getElementById('cartTotal');
+
+            // Mettre à jour le compteur
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCountSpan.textContent = totalItems;
+
+            if (cart.length === 0) {
+                cartItemsDiv.innerHTML = `
+                <div class="cart-empty">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                    </svg>
+                    <p>Votre panier est vide</p>
+                </div>
+            `;
+                cartTotalSpan.textContent = '0,00€';
+                return;
+            }
+
+            // Calculer le total
+            let total = 0;
+            let html = '';
+
+            cart.forEach(item => {
+                let itemPrice = 0;
+                if (item.price !== 'Devis') {
+                    itemPrice = parseFloat(item.price.replace(',', '.')) * item.quantity;
+                    total += itemPrice;
+                }
+
+                html += `
+                <div class="cart-item">
+                    <div class="cart-item-header">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-remove" onclick="event.stopPropagation(); removeFromCart('${item.id}')">🗑️</div>
+                    </div>
+                    <div class="cart-item-price">${item.price === 'Devis' ? 'Sur devis' : item.price + '€'}</div>
+                    <div class="cart-item-controls">
+                        <button class="quantity-btn" onclick="event.stopPropagation(); updateQuantity('${item.id}', -1)">−</button>
+                        <input type="text" class="quantity-input" value="${item.quantity}" disabled>
+                        <button class="quantity-btn" onclick="event.stopPropagation(); updateQuantity('${item.id}', 1)">+</button>
+                    </div>
+                </div>
+            `;
+            });
+
+            cartItemsDiv.innerHTML = html;
+
+            // Formater le total avec la locale française
+            const formattedTotal = total.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            cartTotalSpan.textContent = formattedTotal + '€';
+        }
+
+        // Supprimer un produit du panier
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            saveCart();
+        }
+
+        // Mettre à jour la quantité
+        function updateQuantity(productId, change) {
+            const item = cart.find(item => item.id === productId);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeFromCart(productId);
+                } else {
+                    saveCart();
+                }
+            }
+        }
+
+        // Accéder à la page de paiement
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Votre panier est vide !');
+                return;
+            }
+
+            // Créer un message récapitulatif
+            let message = 'Récapitulatif du panier :\n\n';
+            let total = 0;
+
+            cart.forEach(item => {
+                message += `• ${item.name} (x${item.quantity})`;
+                if (item.price !== 'Devis') {
+                    const itemTotal = parseFloat(item.price.replace(',', '.')) * item.quantity;
+                    total += itemTotal;
+                    message += ` - ${item.price}€ = ${itemTotal.toFixed(2)}€`;
+                } else {
+                    message += ' - Sur devis';
+                }
+                message += '\n';
+            });
+
+            message += '\n';
+            if (total > 0) {
+                message += `Total : ${total.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}€\n\n`;
+            }
+            message += 'Contactez-nous via Discord ou email pour finaliser votre achat.';
+
+            // Afficher le modal de contact avec le message
+            const contactModal = document.getElementById('contactModal');
+            const messageInput = contactModal.querySelector('textarea[name="message"]');
+            messageInput.value = message;
+            contactModal.classList.add('active');
+        }
+
+        // --- GESTION DU MODAL CONTACT ---
+        const contactBtn = document.getElementById('contactBtn');
+        const modal = document.getElementById('contactModal');
+        const closeModal = document.getElementById('closeModal');
+
+        contactBtn.onclick = () => modal.classList.add('active');
+        closeModal.onclick = () => modal.classList.remove('active');
+        window.onclick = (e) => { if (e.target === modal) modal.classList.remove('active'); }
+
+        // --- GESTION DU PANIER SIDEBAR ---
+        const cartIcon = document.getElementById('cartIcon');
+        const cartSidebar = document.getElementById('cartSidebar');
+        const closeCart = document.getElementById('closeCart');
+
+        cartIcon.onclick = () => cartSidebar.classList.add('open');
+        closeCart.onclick = () => cartSidebar.classList.remove('open');
+
+        // Fermer le panier quand on clique ailleurs
+        document.onclick = (e) => {
+            if (!cartSidebar.contains(e.target) && !cartIcon.contains(e.target)) {
+                cartSidebar.classList.remove('open');
+            }
+        }
+
+        // --- SYSTÈME DE PARTICULES ---
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 1.5 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.4;
+                this.speedY = (Math.random() - 0.5) * 0.4;
+                this.opacity = Math.random() * 0.5 + 0.1;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+                    this.reset();
+                }
+            }
+            draw() {
+                ctx.fillStyle = `rgba(99, 102, 241, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        // Création initiale des particules
+        for (let i = 0; i < 60; i++) {
+            particles.push(new Particle());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // === CAROUSEL AUTOMATIQUE === 
+        // Le carousel défile automatiquement avec la CSS animation
+        // Pas besoin de JavaScript pour le contrôle !
+
+        // Charger le panier au démarrage
+        loadCart();
+
+        // Précharger les ressources d'animation
+        window.addEventListener('load', () => {
+            console.log('Keywoz Shop animé et prêt ! 🚀');
         });
-        requestAnimationFrame(animate);
-    }
-    animate();
-</script>
+    </script>
+
+    <script src="/auth.js"></script>
 
 </body>
+
 </html>
