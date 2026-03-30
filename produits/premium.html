@@ -60,15 +60,44 @@
             position: relative;
         }
 
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
         header a {
             display: inline-block;
-            margin-bottom: 30px;
             color: var(--muted);
             text-decoration: none;
             font-weight: 600;
             transition: 0.3s;
         }
         header a:hover { color: var(--primary); transform: translateX(-5px); }
+        
+        .cart-icon { 
+            position: relative; 
+            cursor: pointer; 
+            font-size: 1.5rem;
+            color: var(--primary);
+            transition: 0.3s;
+        }
+        .cart-icon:hover { transform: scale(1.1); }
+        .cart-count { 
+            position: absolute; 
+            top: -8px; 
+            right: -8px; 
+            background: var(--secondary); 
+            color: white; 
+            width: 20px; 
+            height: 20px; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 0.7rem; 
+            font-weight: 800;
+        }
 
         .product-box {
             background: var(--card);
@@ -93,21 +122,30 @@
         .reserve-btn {
             display: inline-block;
             background: var(--primary);
-            padding: 14px 32px;
+            padding: 14px 30px;
             font-weight: 800;
             border-radius: 10px;
-            margin-top: 30px;
             color: white;
             text-decoration: none;
             transition: 0.3s;
             cursor: pointer;
             border: none;
             box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+            flex: 1;
+            min-width: 180px;
+            text-align: center;
         }
 
         .reserve-btn:hover {
             transform: translateY(-3px) scale(1.02);
             box-shadow: 0 12px 25px rgba(99, 102, 241, 0.5);
+        }
+
+        .buttons-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
         }
 
         /* -------- SUGGESTIONS GRID -------- */
@@ -181,6 +219,58 @@
         .btn:hover { transform: scale(1.05); }
 
         .close { position: absolute; top: 15px; right: 20px; font-size: 24px; cursor: pointer; color: var(--muted); }
+
+        /* --- PANIER SIDEBAR --- */
+        .cart-sidebar { 
+            position: fixed; 
+            right: -400px; 
+            top: 0; 
+            width: 400px; 
+            height: 100vh; 
+            background: var(--card); 
+            border-left: 1px solid var(--glass-border); 
+            box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(10px);
+            overflow-y: auto;
+        }
+        @media (max-width: 768px) { .cart-sidebar { width: 100%; right: -100%; } }
+        .cart-sidebar.open { right: 0; }
+        .cart-header { padding: 20px; border-bottom: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: var(--card); }
+        .cart-header h2 { font-size: 1.3rem; }
+        .cart-header .close { cursor: pointer; font-size: 24px; color: var(--muted); }
+        .cart-header .close:hover { color: var(--primary); }
+        .cart-items { flex: 1; padding: 20px; overflow-y: auto; }
+        .cart-item { background: rgba(255,255,255,0.03); padding: 15px; border-radius: 12px; margin-bottom: 15px; border: 1px solid var(--glass-border); display: flex; flex-direction: column; gap: 10px; }
+        .cart-item-header { display: flex; justify-content: space-between; align-items: start; }
+        .cart-item-name { font-weight: 600; color: white; flex: 1; }
+        .cart-item-price { color: var(--primary); font-weight: 700; font-size: 1.1rem; }
+        .cart-item-remove { cursor: pointer; color: var(--muted); font-size: 1.2rem; transition: 0.3s; }
+        .cart-item-remove:hover { color: #ff6b6b; }
+        .cart-item-controls { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.03); padding: 8px 12px; border-radius: 8px; width: fit-content; }
+        .quantity-btn { width: 24px; height: 24px; border: none; background: var(--primary); color: white; border-radius: 4px; cursor: pointer; transition: 0.3s; }
+        .quantity-btn:hover { background: #4f46e5; transform: scale(1.1); }
+        .quantity-input { width: 40px; text-align: center; background: transparent; border: none; color: white; font-weight: 600; }
+        .cart-empty { text-align: center; padding: 40px 20px; color: var(--muted); }
+        .cart-empty svg { width: 60px; height: 60px; margin-bottom: 20px; opacity: 0.5; }
+        .cart-footer { padding: 20px; border-top: 1px solid var(--glass-border); background: var(--card); position: sticky; bottom: 0; }
+        .cart-total { display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: 700; margin-bottom: 15px; color: white; }
+        .cart-total-price { color: var(--primary); font-size: 1.4rem; }
+        .btn-checkout { width: 100%; padding: 15px; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; transition: 0.3s; font-size: 1rem; }
+        .btn-checkout:hover { transform: scale(1.02); box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4); }
+        .btn-addcart { background: var(--secondary); color: white; padding: 14px 30px; border-radius: 10px; font-weight: 700; transition: 0.3s; border: none; cursor: pointer; flex: 1; min-width: 180px; text-align: center; box-shadow: 0 8px 20px rgba(6, 182, 212, 0.2); }
+        .btn-addcart:hover { opacity: 0.9; transform: scale(1.02); box-shadow: 0 0 20px rgba(6, 182, 212, 0.5); }
+        
+        /* === ANIMATION AJOUT AU PANIER === */
+        .cart-particle { position: fixed; pointer-events: none; font-size: 2rem; z-index: 500; animation: flyToCart 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; opacity: 1; }
+        @keyframes flyToCart { 0% { opacity: 1; transform: translateX(0) translateY(0) scale(1) rotateZ(0deg); } 50% { opacity: 0.8; transform: translateX(100px) translateY(-50px) scale(0.8) rotateZ(180deg); } 100% { opacity: 0; transform: translateX(var(--target-x)) translateY(var(--target-y)) scale(0) rotateZ(360deg); } }
+        .add-to-cart-toast { position: fixed; bottom: 30px; right: 30px; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 15px 25px; border-radius: 12px; box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4); display: flex; align-items: center; gap: 12px; z-index: 1001; animation: slideInToast 0.5s ease-out forwards; font-weight: 600; }
+        @keyframes slideInToast { 0% { opacity: 0; transform: translateY(20px) translateX(20px); } 100% { opacity: 1; transform: translateY(0) translateX(0); } }
+        .toast-leave { animation: slideOutToast 0.5s ease-in forwards !important; }
+        @keyframes slideOutToast { 0% { opacity: 1; transform: translateY(0) translateX(0); } 100% { opacity: 0; transform: translateY(20px) translateX(20px); } }
     </style>
 </head>
 
@@ -189,7 +279,13 @@
     <canvas id="particleCanvas"></canvas>
 
     <div class="container">
-        <header><a href="../index.html">← Retour à la boutique</a></header>
+        <header>
+            <a href="../index.html">← Retour à la boutique</a>
+            <div class="cart-icon" id="cartIcon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                <div class="cart-count" id="cartCount">0</div>
+            </div>
+        </header>
 
         <div class="product-box">
             <h1>Compte Steam Premium</h1>
@@ -254,7 +350,31 @@
                 </div>
             </div>
 
-            <button class="reserve-btn" id="reserveBtn">Réserver un compte</button>
+            <div class="buttons-container">
+                <button class="reserve-btn" id="reserveBtn">Réserver un compte</button>
+                <button class="btn-addcart" onclick="addProductToCart(this, 'Compte Steam Premium', 'Devis')">Ajouter au panier</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PANIER SIDEBAR -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2>Votre Panier</h2>
+            <span class="close" id="closeCart">&times;</span>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="cart-empty">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                <p>Votre panier est vide</p>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total :</span>
+                <span class="cart-total-price" id="cartTotal">0,00€</span>
+            </div>
+            <button class="btn-checkout" onclick="checkout()">Procéder au paiement</button>
         </div>
     </div>
 
@@ -276,6 +396,217 @@
     </div>
 
     <script>
+        // --- GESTION DU PANIER ---
+        let cart = [];
+
+        function loadCart() {
+            const saved = localStorage.getItem('keywozCart');
+            if (saved) {
+                cart = JSON.parse(saved);
+                updateCartUI();
+            }
+        }
+
+        function saveCart() {
+            localStorage.setItem('keywozCart', JSON.stringify(cart));
+            updateCartUI();
+        }
+
+        function addProductToCart(button, productName, productPrice) {
+            const existingItem = cart.find(item => item.name === productName);
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({
+                    id: 'prod_' + Date.now(),
+                    name: productName,
+                    price: productPrice,
+                    quantity: 1
+                });
+            }
+            saveCart();
+            animateAddToCart(button, productName);
+        }
+
+        function animateAddToCart(button, productName) {
+            const buttonRect = button.getBoundingClientRect();
+            const cartIcon = document.getElementById('cartIcon');
+            const cartRect = cartIcon.getBoundingClientRect();
+
+            const startX = buttonRect.left + buttonRect.width / 2;
+            const startY = buttonRect.top + buttonRect.height / 2;
+            const endX = cartRect.left + cartRect.width / 2;
+            const endY = cartRect.top + cartRect.height / 2;
+
+            createFlyingParticles(startX, startY, endX, endY);
+            
+            button.textContent = "✓ Ajouté !";
+            button.style.background = "var(--primary)";
+            button.style.transform = "scale(0.95)";
+            setTimeout(() => {
+                button.textContent = "Ajouter au panier";
+                button.style.background = "var(--secondary)";
+                button.style.transform = "scale(1)";
+            }, 1500);
+
+            showAddToCartToast(productName);
+        }
+
+        function createFlyingParticles(fromX, fromY, toX, toY) {
+            const emojis = ['🔹​'];
+            const particleCount = 8;
+            const offsetX = toX - fromX;
+            const offsetY = toY - fromY;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'cart-particle';
+                particle.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                particle.style.left = fromX + 'px';
+                particle.style.top = fromY + 'px';
+                particle.style.setProperty('--target-x', offsetX + (Math.random() - 0.5) * 100 + 'px');
+                particle.style.setProperty('--target-y', offsetY + (Math.random() - 0.5) * 100 + 'px');
+                
+                document.body.appendChild(particle);
+                setTimeout(() => particle.remove(), 1200);
+            }
+        }
+
+
+
+        function showAddToCartToast(productName) {
+            const existingToast = document.querySelector('.add-to-cart-toast');
+            if (existingToast) {
+                existingToast.classList.add('toast-leave');
+                setTimeout(() => existingToast.remove(), 500);
+            }
+
+            const toast = document.createElement('div');
+            toast.className = 'add-to-cart-toast';
+            toast.innerHTML = `<span>✓</span><span>${productName} ajouté au panier !</span>`;
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.add('toast-leave');
+                setTimeout(() => toast.remove(), 500);
+            }, 2500);
+        }
+
+        function updateCartUI() {
+            const cartItemsDiv = document.getElementById('cartItems');
+            const cartCountSpan = document.getElementById('cartCount');
+            const cartTotalSpan = document.getElementById('cartTotal');
+
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCountSpan.textContent = totalItems;
+
+            if (cart.length === 0) {
+                cartItemsDiv.innerHTML = `
+                    <div class="cart-empty">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                        </svg>
+                        <p>Votre panier est vide</p>
+                    </div>
+                `;
+                cartTotalSpan.textContent = '0,00€';
+                return;
+            }
+
+            let total = 0;
+            let html = '';
+
+            cart.forEach(item => {
+                if (item.price !== 'Devis') {
+                    const itemPrice = parseFloat(item.price.replace(',', '.')) * item.quantity;
+                    total += itemPrice;
+                }
+
+                html += `
+                    <div class="cart-item">
+                        <div class="cart-item-header">
+                            <div class="cart-item-name">${item.name}</div>
+                            <div class="cart-item-remove" onclick="event.stopPropagation(); removeFromCart('${item.id}')">🗑️</div>
+                        </div>
+                        <div class="cart-item-price">${item.price === 'Devis' ? 'Sur devis' : item.price + '€'}</div>
+                        <div class="cart-item-controls">
+                            <button class="quantity-btn" onclick="event.stopPropagation(); updateQuantity('${item.id}', -1)">−</button>
+                            <input type="text" class="quantity-input" value="${item.quantity}" disabled>
+                            <button class="quantity-btn" onclick="event.stopPropagation(); updateQuantity('${item.id}', 1)">+</button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            cartItemsDiv.innerHTML = html;
+            const formattedTotal = total.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            cartTotalSpan.textContent = formattedTotal + '€';
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            saveCart();
+        }
+
+        function updateQuantity(productId, change) {
+            const item = cart.find(item => item.id === productId);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeFromCart(productId);
+                } else {
+                    saveCart();
+                }
+            }
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Votre panier est vide !');
+                return;
+            }
+            let message = 'Récapitulatif du panier :\n\n';
+            let total = 0;
+
+            cart.forEach(item => {
+                message += `• ${item.name} (x${item.quantity})`;
+                if (item.price !== 'Devis') {
+                    const itemTotal = parseFloat(item.price.replace(',', '.')) * item.quantity;
+                    total += itemTotal;
+                    message += ` - ${item.price}€ = ${itemTotal.toFixed(2)}€`;
+                } else {
+                    message += ' - Sur devis';
+                }
+                message += '\n';
+            });
+
+            message += '\n';
+            if (total > 0) {
+                message += `Total : ${total.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}€\n\n`;
+            }
+            message += 'Contactez-nous via Discord ou email pour finaliser votre achat.';
+
+            const reserveModal = document.getElementById('reserveModal');
+            const messageInput = reserveModal.querySelector('textarea[name="message"]');
+            messageInput.value = message;
+            reserveModal.classList.add('active');
+        }
+
+        // --- GESTION DU PANIER SIDEBAR ---
+        const cartIcon = document.getElementById('cartIcon');
+        const cartSidebar = document.getElementById('cartSidebar');
+        const closeCart = document.getElementById('closeCart');
+
+        cartIcon.onclick = () => cartSidebar.classList.add('open');
+        closeCart.onclick = () => cartSidebar.classList.remove('open');
+
+        document.onclick = (e) => {
+            if (!cartSidebar.contains(e.target) && !cartIcon.contains(e.target)) {
+                cartSidebar.classList.remove('open');
+            }
+        }
+
         // Modal Logic
         const reserveBtn = document.getElementById('reserveBtn');
         const reserveModal = document.getElementById('reserveModal');
@@ -321,6 +652,9 @@
             requestAnimationFrame(animate);
         }
         animate();
+
+        // Charger le panier au démarrage
+        loadCart();
     </script>
 </body>
 </html>
